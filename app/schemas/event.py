@@ -15,6 +15,7 @@ class EventCreate(BaseModel):
 
 class EventRead(BaseModel):
     id: UUID
+    incident_id: UUID | None
     source: str
     service: str | None
     severity: str | None
