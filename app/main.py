@@ -1,7 +1,6 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
-from sqlalchemy import engine
 
 from app.api.routes_events import router as events_router
 from app.core.db import Base, engine
@@ -12,8 +11,6 @@ async def lifespan(app: FastAPI):
     # Create the database tables
     Base.metadata.create_all(bind=engine)
     yield
-    # Drop the database tables (optional, depending on your needs)
-    # Base.metadata.drop_all(bind=engine)
 
 app = FastAPI(
     title="Incident Triage API",
