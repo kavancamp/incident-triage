@@ -2,7 +2,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.event import Event
-from app.schemas.incident import Incident
+from app.models.incident import Incident
 
 def find_or_create_incident(db: Session, event: Event) -> Incident:
     stmt = select(Incident).where(
