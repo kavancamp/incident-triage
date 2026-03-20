@@ -4,7 +4,7 @@ from fastapi import FastAPI
 
 from app.api.routes_events import router as events_router
 from app.core.db import Base, engine
-from app.models import event
+from app.models import event, incident  # noqa: F401 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
