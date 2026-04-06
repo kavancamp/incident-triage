@@ -31,6 +31,7 @@ class Incident(Base):
         DateTime(timezone=True),
         nullable=False,
         default=lambda: datetime.now(UTC),
+        onupdate=lambda: datetime.now(UTC), 
     )
 
     events = relationship("Event", back_populates="incident")
