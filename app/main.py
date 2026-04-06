@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app.api.routes_events import router as events_router
+from app.api.routes_incidents import router as incidents_router
 from app.core.db import Base, engine
 from app.models import event, incident  # noqa: F401 
 
@@ -23,3 +24,4 @@ def health() -> dict[str, str]:
     return {"status": "ok"}
 
 app.include_router(events_router)
+app.include_router(incidents_router)
