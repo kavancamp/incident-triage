@@ -23,7 +23,6 @@ def find_or_create_incident(db: Session, event: Event) -> Incident:
     )
     
     db.add(new_incident)
-    db.commit()
-    db.refresh(new_incident)
+    db.flush()
     
     return new_incident
