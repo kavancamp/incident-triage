@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from app.core.db import get_db
+from app.models import incident
 from app.models.incident import Incident
 from app.schemas.incident import IncidentRead, IncidentStatusUpdate
 
@@ -47,5 +48,26 @@ def update_incident_status(
     incident.status = payload.status
     db.commit()
     db.refresh(incident)
+
+    return incident
+
+@router.get("/next", response_model=IncidentRead)
+def get_next_incident(db: Session = Depends(get_db)) -> Incident:
+    stmt = (
+        select(Incident)
+        .where(Incident.status.in_(("open", "investigating")))
+        .order_by(
+            Incident.priority_score.desc(),
+            Incident.updated_at.desc(),
+        )
+    )
+
+    incident = db.scalar(stmt)
+
+    if incident is None:
+        raise HTTPException(
+            status_code=404,
+            detail="No active incidents found",
+        )
 
     return incident
