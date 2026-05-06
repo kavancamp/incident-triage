@@ -71,6 +71,9 @@ Event 3:
 - GET /incidents → list incidents with related events
 - GET /incidents/{id} → get a single incident
 
+- PATCH /incidents/{id} → update incident status
+- GET /incidents/next → get highest-priority active incident
+
 ## Run locally
 
 ### 1. Start the database:
@@ -102,7 +105,6 @@ http://127.0.0.1:8000/docs
 ## Future Work
 
 - Smarter incident grouping (message similarity, time windows)
-- Incident status updates (open → resolved)
 - Filtering and search (by service, severity, status)
 - AI-assisted clustering of events
 - Alert deduplication

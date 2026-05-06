@@ -3,9 +3,10 @@ from app.models.incident import Incident
 
 SEVERITY_WEIGHTS = {
     "low": 1,
-    "medium": 2,
-    "high": 3,
-    "critical": 4,
+    "warning": 2,
+    "medium": 3,
+    "high": 4,
+    "critical": 5,
 }
 
 
